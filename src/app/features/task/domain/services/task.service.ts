@@ -19,6 +19,19 @@ export class TaskService {
     return newTask;
   }
 
+  updateTask(
+    id: string,
+    name: string,
+    deadline: string,
+    people: Person[] = [],
+    completed: boolean = false
+  ): Task {
+    const task = new Task(id, name, deadline, people, completed);
+    this.taskRepository.save(task);
+
+    return task;
+  }
+
   listTasks(): Task[] {
     return this.taskRepository.getAll();
   }

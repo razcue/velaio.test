@@ -4,4 +4,5 @@ export interface IPersonRepository {
   getNextId(): string;
   save(person: Person): void;
   getAll(): Person[];
+  getById(id: string): Person | undefined;
 }

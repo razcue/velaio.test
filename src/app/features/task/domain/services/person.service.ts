@@ -17,6 +17,18 @@ export class PersonService {
     return newPerson;
   }
 
+  updatePerson(
+    id: string,
+    name: string,
+    age: number,
+    skills: string[] = []
+  ): Person {
+    const person = new Person(id, name, age, skills);
+    this.personRepository.save(person);
+
+    return person;
+  }
+
   listPeople(): Person[] {
     return this.personRepository.getAll();
   }
@@ -33,6 +45,10 @@ export class PersonService {
   removeSkillFromPerson(person: Person, skill: string) {
     person.skills = person.skills.filter(s => s !== skill);
     this.personRepository.save(person);
+  }
+
+  getPersonById(personId: string): Person | undefined {
+    return this.personRepository.getById(personId);
   }
 
   private validatePerson(person: Person): void {

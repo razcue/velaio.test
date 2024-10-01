@@ -49,10 +49,9 @@ export class TaskListComponent {
     dialogRef.afterClosed().subscribe(result => {
       if (result) {
         if (task) {
-          const updatedTask = this.taskService.getTaskById(task.id);
-          if (updatedTask) {
-            Object.assign(task, updatedTask);
-          }
+          this.taskService.updateTask(task['id'], result['name'], result['deadline'], result['people'], task['completed']).then(() => {
+            this.dataSource.data = [...this.taskService.listTasks()];
+          });
         } else {
           this.taskService.createTask(result.name, result.deadline, result.people);
         }

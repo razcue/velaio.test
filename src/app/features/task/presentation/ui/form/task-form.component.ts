@@ -1,4 +1,4 @@
-import { Component, Inject } from '@angular/core';
+import { ChangeDetectionStrategy, Component, Inject } from '@angular/core';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import {
   FormBuilder,
@@ -23,6 +23,7 @@ import { Person } from '../../../domain/models/person.model';
   templateUrl: './task-form.component.html',
   styleUrls: ['./task-form.component.scss'],
   standalone: true,
+  changeDetection: ChangeDetectionStrategy.OnPush,
   imports: [
     CommonModule,
     MatDialogModule,
@@ -57,8 +58,9 @@ export class TaskFormComponent {
     return this.taskForm.get('people') as FormArray;
   }
 
-  newPerson(person: any = { name: '', age: '', skills: [] }): FormGroup {
+  newPerson(person: any = { id: '', name: '', age: '', skills: [] }): FormGroup {
     return this.fb.group({
+      id: [person.id],
       name: [person.name, Validators.required],
       age: [person.age, Validators.required],
       skills: this.fb.array(

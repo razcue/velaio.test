@@ -28,6 +28,10 @@ export class TaskService {
     return this.taskService.getTaskById(taskId);
   }
 
+  getPersonById(personId: string): Person | undefined {
+    return this.personService.getPersonById(personId);
+  }
+
   createTask(
     name: string,
     deadline: string,
@@ -45,6 +49,35 @@ export class TaskService {
     this.tasksSubject.next(tasks);
 
     return newTask;
+  }
+
+  updateTask(
+    id: string,
+    name: string,
+    deadline: string,
+    people: [] = [],
+    completed: boolean = false
+  ): Promise<void> {
+    return new Promise((resolve) => {
+      const currentTask = this.taskService.getTaskById(id);
+
+      if (currentTask) {
+        let peopleList: Person[] = [];
+
+        for (const person of people) {
+          const currentPerson = this.personService.updatePerson(person['id'], person['name'], person['age'], person['skills']);
+          peopleList.push(currentPerson);
+        }
+
+        this.taskService.updateTask(id, name, deadline, peopleList, completed);
+      }
+
+      setTimeout(() => {
+        const tasks = this.tasksSubject.getValue();
+        this.tasksSubject.next([...tasks]);
+        resolve();
+      }, 0);
+    });
   }
 
   completeTask(taskId: string): Promise<void> {

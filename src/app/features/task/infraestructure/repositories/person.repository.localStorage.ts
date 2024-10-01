@@ -48,4 +48,8 @@ export class PersonLocalStorageRepository implements IPersonRepository {
     const peopleJson = localStorage.getItem(this.storageKey);
     return peopleJson ? JSON.parse(peopleJson) : [];
   }
+
+  getById(id: string): Person | undefined {
+    return this.getAll().find(person => person.id === id);
+  }
 }
