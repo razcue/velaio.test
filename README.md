@@ -1,27 +1,71 @@
-# VelaioTest
+# Velaio Frontend Developer Test
 
-This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 16.2.16.
+This project was created as part of a technical assessment for the **Frontend Developer** position at [VELAIO](https://velaio.com/). The project follows **Clean Architecture** with a n-layered approach, ensuring scalability, testability, and maintainability.
 
-## Development server
+## Table of Contents
+1. [Project Overview](#project-overview)
+2. [Architecture](#architecture)
+   1. [Domain Layer](#domain-layer)
+   2. [Infrastructure Layer](#infrastructure-layer)
+   3. [Presentation Layer](#presentation-layer)
+3. [Installation](#installation)
+   1. [Install dependencies](#install-dependencies)
+   2. [Environment setup](#environment-setup)
+   3. [Go Diego Go](#go-diego-go)
+6. [Contact Me](#contact-me)
 
-Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The application will automatically reload if you change any of the source files.
+## Project Overview
 
-## Code scaffolding
+This project demonstrates frontend development skills using **Angular 16**. It includes a solution for the technical test provided by VELAIO, located in the file `src/assets/Examen tecnico Angular V1.pdf`.
 
-Run `ng generate component component-name` to generate a new component. You can also use `ng generate directive|pipe|service|class|guard|interface|enum|module`.
+The project implements the **Clean Architecture** design pattern, structured into three layers:
+- **Domain**
+- **Infrastructure**
+- **Presentation**
 
-## Build
+## Architecture
 
-Run `ng build` to build the project. The build artifacts will be stored in the `dist/` directory.
+### Domain Layer
+The **Domain** layer contains the core business logic and entities, independent of any framework or external dependencies. It includes:
+- **Models**: Objects representing the main business rules.
+- **Services**: Business logic, use cases, and rules processing.
 
-## Running unit tests
+### Infrastructure Layer
+The **Infrastructure** layer interacts with external systems such as APIs or databases. It includes:
+- **Repositories**: Abstraction layer for data storage and retrieval.
 
-Run `ng test` to execute the unit tests via [Karma](https://karma-runner.github.io).
+### Presentation Layer
+The **Presentation** layer is responsible for handling the user interface and user interactions using Angular components. It includes:
+- **UI**: Angular components for UI rendering.
+- **Services**: Manage the communication between the Presentation and Infrastructure layers.
 
-## Running end-to-end tests
+## Installation
 
-Run `ng e2e` to execute the end-to-end tests via a platform of your choice. To use this command, you need to first add a package that implements end-to-end testing capabilities.
+### Install dependencies
+First, clone the repository and install the necessary dependencies:
 
-## Further help
+```
+npm install
+```
 
-To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI Overview and Command Reference](https://angular.io/cli) page.
+### Environment setup
+Ensure you have **Angular CLI** installed globally. If not, you can install it with:
+
+```
+npm install -g @angular/cli@16
+```
+
+### Go Diego Go
+
+*Go for the money.* -says Diego-
+
+To run the development server, execute the following command:
+
+```
+ng serve
+```
+
+And access to the URL provided (Example: http://localhost:4200/)
+
+## Contact Me
+To get in touch go check out my [GitHub Page](https://razcue.github.io/).
