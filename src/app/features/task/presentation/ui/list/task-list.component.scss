@@ -1,13 +1,76 @@
-.completed {
-  color: green;
-  font-weight: normal;
-  font-size: 0.75rem;
-  opacity: 0.55;
+.task-list {
+  &__toolbar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+
+  &__filter {
+    display: flex;
+    align-items: center;
+    margin: 8px 0;
+    gap: 16px;
+    flex-wrap: wrap;
+  }
+
+  &__filter-title {
+    margin: 0 0 0 16px;
+  }
+
+  &__title {
+    font-size: 24px;
+    font-weight: bold;
+  }
+
+  &__actions {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+  }
+
+  &__filters {
+    margin: 15px 0;
+    display: flex;
+    gap: 10px;
+
+    button {
+      &.active {
+        background-color: #1976d2;
+        color: white;
+      }
+    }
+  }
+
+  &__table {
+    width: 100%;
+    table-layout: fixed;
+  }
+
+  &__task-name {
+    .task-list__status--completed {
+      color: green;
+      font-weight: normal;
+      font-size: 0.75rem;
+      opacity: 0.55;
+    }
+
+    .task-list__status--pending {
+      color: red;
+      font-weight: normal;
+      font-size: 0.75rem;
+      opacity: 0.55;
+    }
+  }
 }
 
-.pending {
-  color: red;
-  font-weight: normal;
-  font-size: 0.75rem;
-  opacity: 0.55;
+.mat-mdc-cell.mdc-data-table__cell.cdk-cell {
+  border-bottom: none;
+}
+
+.mat-mdc-row.mdc-data-table__row.cdk-row:nth-child(odd) {
+  background-color: #f2f2f2;
+}
+
+.mat-mdc-row.mdc-data-table__row.cdk-row:nth-child(even) {
+  background-color: #ffffff;
 }

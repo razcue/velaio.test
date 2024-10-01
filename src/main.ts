@@ -8,7 +8,7 @@ import {
   PersonLocalStorageRepository
 } from './app/features/task/infraestructure/repositories/person.repository.localStorage';
 import { MAT_DATE_FORMATS, DateAdapter} from '@angular/material/core';
-import { CUSTOM_DATE_FORMATS } from './app/features/task/constants';
+import { CUSTOM_DATE_FORMATS } from './app/features/task/presentation/constants';
 import { CustomDateAdapter } from './app/features/task/presentation/services/custom-date.adapter';
 
 bootstrapApplication(AppComponent, {

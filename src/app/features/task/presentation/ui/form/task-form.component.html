@@ -1,60 +1,65 @@
+<h2 class="dialog-header">{{ data?.name ? 'Editar Tarea' : 'Crear Nueva Tarea' }}</h2>
+
 <form [formGroup]="taskForm" (ngSubmit)="onSave()" class="task-form">
   <!-- Task Name -->
   <mat-form-field appearance="fill" class="task-form__field">
-    <mat-label>Task Name</mat-label>
-    <input matInput formControlName="name" placeholder="Enter task name" required>
+    <mat-label>Nombre de la tarea</mat-label>
+    <input matInput formControlName="name" placeholder="Nombre de la tarea" required>
   </mat-form-field>
 
   <!-- Deadline -->
   <mat-form-field appearance="fill" class="task-form__field">
-    <mat-label>Deadline</mat-label>
-    <input matInput [matDatepicker]="picker" formControlName="deadline" placeholder="Choose a deadline" required>
+    <mat-label>Fecha límite</mat-label>
+    <input matInput [matDatepicker]="picker" formControlName="deadline" placeholder="Fecha límite" required>
     <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
     <mat-datepicker #picker></mat-datepicker>
   </mat-form-field>
 
   <!-- People Section -->
-  <div formArrayName="people" class="task-form__people">
-    <div *ngFor="let person of people.controls; let personIndex = index" [formGroupName]="personIndex" class="task-form__person">
-      <h3 class="task-form__person-title">Person {{ personIndex + 1 }}</h3>
+  <div class="task-form__people-section">
+    <h3 *ngIf="people.length" class="dialog-header">Personas Asociadas:</h3>
+    <div formArrayName="people" class="task-form__people">
+      <div *ngFor="let person of people.controls; let personIndex = index" [formGroupName]="personIndex" class="task-form__person">
+        <!-- Person Name -->
+        <mat-form-field appearance="fill" class="task-form__field task-form__field--person">
+          <mat-label>Nombre completo</mat-label>
+          <input matInput formControlName="name" placeholder="Nombre completo" required>
+        </mat-form-field>
 
-      <!-- Person Name -->
-      <mat-form-field appearance="fill" class="task-form__field task-form__field--person">
-        <mat-label>Name</mat-label>
-        <input matInput formControlName="name" placeholder="Enter name" required>
-      </mat-form-field>
+        <!-- Person Age -->
+        <mat-form-field appearance="fill" class="task-form__field task-form__field--person">
+          <mat-label>Edad</mat-label>
+          <input matInput type="number" formControlName="age" placeholder="Edad" required>
+        </mat-form-field>
 
-      <!-- Person Age -->
-      <mat-form-field appearance="fill" class="task-form__field task-form__field--person">
-        <mat-label>Age</mat-label>
-        <input matInput type="number" formControlName="age" placeholder="Enter age" required>
-      </mat-form-field>
-
-      <!-- Skills Section -->
-      <div formArrayName="skills" class="task-form__skills">
-        <h4 class="task-form__skills-title">Skills</h4>
-        <div *ngFor="let skill of getSkills(personIndex).controls; let skillIndex = index" class="task-form__skill">
-          <mat-form-field appearance="fill" class="task-form__field task-form__field--skill">
-            <mat-label>Skill {{ skillIndex + 1 }}</mat-label>
-            <input matInput [formControl]="getSkillControl(personIndex, skillIndex)" placeholder="Enter skill">
-            <div *ngIf="getSkillControl(personIndex, skillIndex)?.touched && getSkillControl(personIndex, skillIndex)?.invalid">
-              <small *ngIf="getSkillControl(personIndex, skillIndex)?.errors?.['required']" class="task-form__skills-error">Skill is required.</small>
-            </div>
-          </mat-form-field>
-          <button mat-button (click)="removeSkill(personIndex, skillIndex)" class="task-form__remove-skill">Remove Skill</button>
+        <!-- Skills Section -->
+        <div formArrayName="skills" class="task-form__skills">
+          <h4 class="task-form__skills-title">Habilidades:</h4>
+          <div *ngFor="let skill of getSkills(personIndex).controls; let skillIndex = index" class="task-form__skill">
+            <mat-form-field appearance="fill" class="task-form__field task-form__field--skill">
+              <mat-label>Habilidad {{ skillIndex + 1 }}</mat-label>
+              <input matInput [formControl]="getSkillControl(personIndex, skillIndex)" placeholder="Habilidad">
+            </mat-form-field>
+            <button mat-button (click)="removeSkill(personIndex, skillIndex)" class="task-form__remove-skill">Eliminar Habilidad</button>
+          </div>
+          <button mat-button (click)="addSkill(personIndex)" class="task-form__add-skill">Añadir Habilidad</button>
+          <small *ngIf="getSkills(personIndex).invalid && getSkills(personIndex).touched" class="task-form__skills-error">
+            Al menos una habilidad es requerida.
+          </small>
         </div>
-        <button mat-button (click)="addSkill(personIndex)" class="task-form__add-skill">Add Skill</button>
+
+        <button mat-button (click)="removePerson(personIndex)" class="task-form__remove-person">Eliminar Persona</button>
       </div>
-
-      <button mat-button (click)="removePerson(personIndex)" class="task-form__remove-person">Remove Person</button>
     </div>
-  </div>
 
-  <button mat-button (click)="addPerson()" class="task-form__add-person">Add Person</button>
+    <button mat-button (click)="addPerson()" class="task-form__add-person">Añadir Persona</button>
+    <small *ngIf="people.length === 0 || (people.invalid && people.touched)" class="task-form__persons-error">
+      Al menos una persona es requerida.
+    </small>
+  </div>
 
   <!-- Save and Cancel Buttons -->
   <div class="task-form__actions">
-    <button mat-raised-button color="primary" type="submit" class="task-form__save">Save</button>
-    <button mat-raised-button color="warn" (click)="onCancel()" class="task-form__cancel">Cancel</button>
+    <button mat-raised-button color="primary" type="submit" class="task-form__save">Guardar Tarea</button>
   </div>
 </form>

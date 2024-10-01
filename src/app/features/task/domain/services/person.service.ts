@@ -29,28 +29,6 @@ export class PersonService {
     return person;
   }
 
-  listPeople(): Person[] {
-    return this.personRepository.getAll();
-  }
-
-  addSkillToPerson(person: Person, skill: string) {
-    if (!person.skills.includes(skill)) {
-      person.skills.push(skill);
-      this.personRepository.save(person);
-    } else {
-      throw new Error("Esta habilidad ya está asociada a la persona.");
-    }
-  }
-
-  removeSkillFromPerson(person: Person, skill: string) {
-    person.skills = person.skills.filter(s => s !== skill);
-    this.personRepository.save(person);
-  }
-
-  getPersonById(personId: string): Person | undefined {
-    return this.personRepository.getById(personId);
-  }
-
   private validatePerson(person: Person): void {
     if (person.name.length < 5) {
       throw new Error("El nombre debe tener al menos 5 caracteres.");

@@ -10,7 +10,6 @@ export const TASK_FILTER_LABELS = {
   PENDING: 'Pendientes'
 };
 
-
 export const TASK_STATUS_LABELS = {
   COMPLETED: 'Completada',
   PENDING: 'Pendiente'
@@ -18,10 +17,10 @@ export const TASK_STATUS_LABELS = {
 
 export const CUSTOM_DATE_FORMATS = {
   parse: {
-    dateInput: 'DD/MM/YYYY',
+    dateInput: 'YYYY/MM/DD',
   },
   display: {
-    dateInput: 'DD/MM/YYYY',
+    dateInput: 'YYYY/MM/DD',
     monthYearLabel: 'MMM YYYY',
     dateA11yLabel: 'LL',
     monthYearA11yLabel: 'MMMM YYYY',

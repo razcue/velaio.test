@@ -9,6 +9,12 @@
   margin-bottom: -26px;
 }
 
+.task-form__people-section {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
 .task-form__people {
   display: flex;
   flex-direction: column;
@@ -40,9 +46,10 @@
 }
 
 .task-form__skills-title {
-  margin: 0 0 2px 0;
+  margin: 16px 0 2px 0;
 }
 
+.task-form__persons-error,
 .task-form__skills-error {
   font-size: x-small;
   color: red;
@@ -50,6 +57,7 @@
 
 .task-form__skill {
   display: flex;
+  flex-direction: column;
   align-items: center;
   gap: 16px;
 }
@@ -74,7 +82,7 @@
 
 .task-form__actions {
   display: flex;
-  justify-content: space-between;
+  justify-content: center;
 }
 
 .task-form__save {
@@ -82,7 +90,7 @@
   color: white;
 }
 
-.task-form__cancel {
-  background-color: #f44336;
-  color: white;
+.dialog-header {
+  padding: 16px 16px 0;
+  margin: 0;
 }

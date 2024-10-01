@@ -94,10 +94,6 @@ export class TaskFormComponent {
     this.getSkills(personIndex).removeAt(skillIndex);
   }
 
-  onCancel(): void {
-    this.dialogRef.close();
-  }
-
   onSave(): void {
     if (this.taskForm.valid) {
       this.dialogRef.close(this.taskForm.value);

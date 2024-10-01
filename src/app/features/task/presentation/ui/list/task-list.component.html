@@ -1,27 +1,36 @@
-<div class="task-list-container">
-  <mat-toolbar color="primary">
-    <span>Task List</span>
-    <button mat-raised-button color="accent" (click)="openTaskForm()">Add Task</button>
+<div class="task-list">
+  <mat-toolbar color="primary" class="task-list__toolbar">
+    <span class="task-list__title">Lista de Tareas</span>
+    <div class="task-list__actions">
+      <button mat-raised-button color="accent" (click)="openTaskForm()">Añadir Tarea</button>
+    </div>
   </mat-toolbar>
 
-  <table mat-table [dataSource]="dataSource" class="mat-elevation-z8">
+  <div class="task-list__filter">
+    <h4 class="task-list__filter-title">Filtros:</h4>
+    <mat-checkbox [(ngModel)]="filterCompleted" (change)="onFilterChange(TASK_FILTER_OPTIONS.COMPLETED)">{{ TASK_FILTER_LABELS.COMPLETED }}</mat-checkbox>
+    <mat-checkbox [(ngModel)]="filterPending" (change)="onFilterChange(TASK_FILTER_OPTIONS.PENDING)">{{ TASK_FILTER_LABELS.PENDING }}</mat-checkbox>
+    <mat-checkbox [(ngModel)]="filterAll" (change)="onFilterChange(TASK_FILTER_OPTIONS.ALL)" [checked]="true">{{ TASK_FILTER_LABELS.ALL }}</mat-checkbox>
+  </div>
+
+  <table mat-table [dataSource]="dataSource" class="task-list__table mat-elevation-z8">
     <ng-container matColumnDef="name">
-      <th mat-header-cell *matHeaderCellDef> Task Name </th>
-      <td mat-cell *matCellDef="let task">
+      <th mat-header-cell *matHeaderCellDef>Nombre de la tarea</th>
+      <td mat-cell *matCellDef="let task" class="task-list__task-name">
         {{ task.name }}
-        <span [ngClass]="{'completed': task.completed, 'pending': !task.completed}">
+        <span [ngClass]="{'task-list__status--completed': task.completed, 'task-list__status--pending': !task.completed}">
           ({{ task.completed | taskStatus }})
         </span>
       </td>
     </ng-container>
 
     <ng-container matColumnDef="deadline">
-      <th mat-header-cell *matHeaderCellDef> Deadline </th>
-      <td mat-cell *matCellDef="let task"> {{ task.deadline | date:'dd/MM/yyyy' }} </td>
+      <th mat-header-cell *matHeaderCellDef>Fecha límite</th>
+      <td mat-cell *matCellDef="let task"> {{ task.deadline | date:'yyyy-MM-dd' }} </td>
     </ng-container>
 
     <ng-container matColumnDef="people">
-      <th mat-header-cell *matHeaderCellDef> People </th>
+      <th mat-header-cell *matHeaderCellDef>Personas Asociadas</th>
       <td mat-cell *matCellDef="let task">
         <div *ngFor="let person of task.people">
           <div>{{ person.name }} ({{ person.age }})</div>
@@ -31,12 +40,12 @@
     </ng-container>
 
     <ng-container matColumnDef="actions">
-      <th mat-header-cell *matHeaderCellDef> Actions </th>
+      <th mat-header-cell *matHeaderCellDef>Acciones</th>
       <td mat-cell *matCellDef="let task">
         <button mat-icon-button color="primary" (click)="editTask(task)">
           <mat-icon>edit</mat-icon>
         </button>
-        <button mat-icon-button color="warn" *ngIf="!task.completed" (click)="completeTask(task)">
+        <button mat-icon-button color="primary" *ngIf="!task.completed" (click)="completeTask(task)">
           <mat-icon>check</mat-icon>
         </button>
       </td>

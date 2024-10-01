@@ -24,14 +24,6 @@ export class TaskService {
     return this.taskService.listTasks();
   }
 
-  getTaskById(taskId: string): Task | undefined {
-    return this.taskService.getTaskById(taskId);
-  }
-
-  getPersonById(personId: string): Person | undefined {
-    return this.personService.getPersonById(personId);
-  }
-
   createTask(
     name: string,
     deadline: string,

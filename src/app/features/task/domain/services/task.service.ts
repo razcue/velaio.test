@@ -51,10 +51,6 @@ export class TaskService {
     }
   }
 
-  filterTasks(completed: boolean): Task[] {
-    return this.taskRepository.getAll().filter(task => task.completed === completed);
-  }
-
   getTaskById(taskId: string): Task | undefined {
     return this.taskRepository.getById(taskId);
   }
@@ -63,8 +59,6 @@ export class TaskService {
     if (task.name.length < 5) {
       throw new Error("El nombre debe tener al menos 5 caracteres.");
     }
-
-    //TODO validate deadline
 
     if (task.people.length === 0) {
       throw new Error("La terea debe estar asignada al menos a una persona.");

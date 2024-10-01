@@ -1,5 +1,5 @@
 import { Pipe, PipeTransform } from '@angular/core';
-import { TASK_STATUS_LABELS } from '../../../constants';
+import { TASK_STATUS_LABELS } from '../../constants';
 
 @Pipe({
   name: 'taskStatus',
