@@ -44,7 +44,7 @@ export class TaskFormComponent {
     @Inject(MAT_DIALOG_DATA) public data: any
   ) {
     this.taskForm = this.fb.group({
-      name: [data ? data.name : '', Validators.required],
+      name: [data ? data.name : '', [Validators.required, Validators.minLength(5)]],
       deadline: [data ? data.deadline : '', Validators.required],
       people: this.fb.array([], this.minLengthArray(1)),
     });
@@ -61,8 +61,8 @@ export class TaskFormComponent {
   newPerson(person: any = { id: '', name: '', age: '', skills: [] }): FormGroup {
     return this.fb.group({
       id: [person.id],
-      name: [person.name, Validators.required],
-      age: [person.age, Validators.required],
+      name: [person.name, [Validators.required, Validators.minLength(5)]],
+      age: [person.age, [Validators.required, Validators.min(18)]],
       skills: this.fb.array(
         (person.skills || []).map((skill: string) => this.fb.control(skill, Validators.required)),
         this.minLengthArray(1)

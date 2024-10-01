@@ -54,7 +54,7 @@
 
     <button mat-button (click)="addPerson()" class="task-form__add-person">Añadir Persona</button>
     <small *ngIf="people.length === 0 || (people.invalid && people.touched)" class="task-form__persons-error">
-      Al menos una persona es requerida.
+      Al menos una persona (válida) es requerida.
     </small>
   </div>
 
