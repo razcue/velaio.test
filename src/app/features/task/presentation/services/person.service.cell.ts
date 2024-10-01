@@ -5,8 +5,8 @@ import { PersonService as PersonDomainService } from '../../domain/services/pers
 @Injectable({
   providedIn: 'root',
 })
-export class PersonService extends PersonDomainService {
-  constructor() {
-    super(new PersonLocalStorageRepository());
+export class PersonServiceCell extends PersonDomainService {
+  constructor(private personLocalStorageRepository: PersonLocalStorageRepository) {
+    super(personLocalStorageRepository);
   }
 }

@@ -1,0 +1,48 @@
+<div class="task-list-container">
+  <mat-toolbar color="primary">
+    <span>Task List</span>
+    <button mat-raised-button color="accent" (click)="openTaskForm()">Add Task</button>
+  </mat-toolbar>
+
+  <table mat-table [dataSource]="tasks" class="mat-elevation-z8">
+    <ng-container matColumnDef="name">
+      <th mat-header-cell *matHeaderCellDef> Task Name </th>
+      <td mat-cell *matCellDef="let task">
+        {{ task.name }}
+        <span [ngClass]="{'completed': task.completed, 'pending': !task.completed}">
+          ({{ task.completed | taskStatus }})
+        </span>
+      </td>
+    </ng-container>
+
+    <ng-container matColumnDef="deadline">
+      <th mat-header-cell *matHeaderCellDef> Deadline </th>
+      <td mat-cell *matCellDef="let task"> {{ task.deadline | date:'dd/MM/yyyy' }} </td>
+    </ng-container>
+
+    <ng-container matColumnDef="people">
+      <th mat-header-cell *matHeaderCellDef> People </th>
+      <td mat-cell *matCellDef="let task">
+        <div *ngFor="let person of task.people">
+          <div>{{ person.name }} ({{ person.age }})</div>
+          <div>Habilidades: {{ person.skills.join(', ') }}</div>
+        </div>
+      </td>
+    </ng-container>
+
+    <ng-container matColumnDef="actions">
+      <th mat-header-cell *matHeaderCellDef> Actions </th>
+      <td mat-cell *matCellDef="let task">
+        <button mat-icon-button color="primary" (click)="editTask(task)">
+          <mat-icon>edit</mat-icon>
+        </button>
+        <button mat-icon-button color="warn" *ngIf="!task.completed" (click)="completeTask(task)">
+          <mat-icon>check</mat-icon>
+        </button>
+      </td>
+    </ng-container>
+
+    <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+    <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+  </table>
+</div>

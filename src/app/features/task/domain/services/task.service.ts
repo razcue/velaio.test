@@ -56,10 +56,5 @@ export class TaskService {
     if (task.people.length === 0) {
       throw new Error("La terea debe estar asignada al menos a una persona.");
     }
-
-    //TODO validate each person
-    // for (const person of task.people) {
-    //   person.validatePerson();
-    // }
   }
 }
