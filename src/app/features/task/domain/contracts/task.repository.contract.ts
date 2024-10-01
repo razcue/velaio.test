@@ -1,8 +1,8 @@
 import { Task } from '../models/task.model';
 
 export interface ITaskRepository {
-  getNextId(): bigint;
+  getNextId(): string;
   save(task: Task): void;
   getAll(): Task[];
-  getById(id: bigint): Task | undefined;
+  getById(id: string): Task | undefined;
 }

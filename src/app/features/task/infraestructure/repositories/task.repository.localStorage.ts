@@ -14,10 +14,11 @@ export class TaskLocalStorageRepository implements ITaskRepository {
     this.lastTaskId = taskId ? BigInt(taskId) : BigInt(0);
   }
 
-  getNextId(): bigint {
+  getNextId(): string {
     this.lastTaskId += BigInt(1);
     this.saveLastId();
-    return this.lastTaskId;
+
+    return this.lastTaskId.toString();
   }
 
   private saveLastId() {
@@ -26,7 +27,20 @@ export class TaskLocalStorageRepository implements ITaskRepository {
 
   save(task: Task): void {
     const tasks = this.getAll();
-    tasks.push(task);
+
+    const taskToSave = {
+      ...task,
+      id: task.id.toString()
+    };
+
+    const index = tasks.findIndex(t => t.id === task.id);
+
+    if (index >= 0) {
+      tasks[index] = taskToSave;
+    } else {
+      tasks.push(taskToSave);
+    }
+
     localStorage.setItem(this.storageKey, JSON.stringify(tasks));
   }
 
@@ -35,7 +49,7 @@ export class TaskLocalStorageRepository implements ITaskRepository {
     return tasksJson ? JSON.parse(tasksJson) : [];
   }
 
-  getById(id: bigint): Task | undefined {
+  getById(id: string): Task | undefined {
     return this.getAll().find(task => task.id === id);
   }
 }

@@ -7,12 +7,12 @@ export class TaskService {
 
   createTask(
     name: string,
-    dateLimit: string,
+    deadline: string,
     people: Person[] = [],
     completed: boolean = false
   ): Task {
     const id = this.taskRepository.getNextId();
-    const newTask = new Task(id, name, dateLimit, people, completed);
+    const newTask = new Task(id, name, deadline, people, completed);
     this.validateTask(newTask);
     this.taskRepository.save(newTask);
 
@@ -23,7 +23,7 @@ export class TaskService {
     return this.taskRepository.getAll();
   }
 
-  completeTask(taskId: bigint) {
+  completeTask(taskId: string) {
     const task = this.taskRepository.getById(taskId);
 
     if (task) {
@@ -42,7 +42,7 @@ export class TaskService {
     return this.taskRepository.getAll().filter(task => task.completed === completed);
   }
 
-  getTaskById(taskId: bigint): Task | undefined {
+  getTaskById(taskId: string): Task | undefined {
     return this.taskRepository.getById(taskId);
   }
 
@@ -51,7 +51,7 @@ export class TaskService {
       throw new Error("El nombre debe tener al menos 5 caracteres.");
     }
 
-    //TODO validate dateLimit
+    //TODO validate deadline
 
     if (task.people.length === 0) {
       throw new Error("La terea debe estar asignada al menos a una persona.");

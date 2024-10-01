@@ -14,10 +14,11 @@ export class PersonLocalStorageRepository implements IPersonRepository {
     this.lastPersonId = personId ? BigInt(personId) : BigInt(0);
   }
 
-  getNextId(): bigint {
+  getNextId(): string {
     this.lastPersonId += BigInt(1);
     this.saveLastId();
-    return this.lastPersonId;
+
+    return this.lastPersonId.toString();
   }
 
   private saveLastId() {
@@ -26,12 +27,18 @@ export class PersonLocalStorageRepository implements IPersonRepository {
 
   save(person: Person): void {
     const people = this.getAll();
+
+    const personToSave = {
+      ...person,
+      id: person.id.toString()
+    };
+
     const index = people.findIndex(p => p.id === person.id);
 
     if (index >= 0) {
-      people[index] = person;
+      people[index] = personToSave;
     } else {
-      people.push(person);
+      people.push(personToSave);
     }
 
     localStorage.setItem(this.storageKey, JSON.stringify(people));

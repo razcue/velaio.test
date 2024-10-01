@@ -1,0 +1,88 @@
+.task-form {
+  padding: 16px;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.task-form__field {
+  margin-bottom: -26px;
+}
+
+.task-form__people {
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+}
+
+.task-form__person {
+  padding: 10px 16px;
+  border: 1px solid #e0e0e0;
+  border-radius: 8px;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.task-form__person-title {
+  margin: 0;
+  font-weight: bold;
+}
+
+.task-form__field--person {
+  flex: 1;
+}
+
+.task-form__skills {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+}
+
+.task-form__skills-title {
+  margin: 0 0 2px 0;
+}
+
+.task-form__skills-error {
+  font-size: x-small;
+  color: red;
+}
+
+.task-form__skill {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+}
+
+.task-form__remove-skill {
+  color: red;
+  cursor: pointer;
+}
+
+.task-form__add-skill {
+  align-self: flex-start;
+}
+
+.task-form__remove-person {
+  align-self: flex-end;
+  color: red;
+}
+
+.task-form__add-person {
+  align-self: flex-start;
+}
+
+.task-form__actions {
+  display: flex;
+  justify-content: space-between;
+}
+
+.task-form__save {
+  background-color: #3f51b5;
+  color: white;
+}
+
+.task-form__cancel {
+  background-color: #f44336;
+  color: white;
+}

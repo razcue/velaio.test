@@ -1,7 +1,7 @@
 import { Person } from '../models/person.model';
 
 export interface IPersonRepository {
-  getNextId(): bigint;
+  getNextId(): string;
   save(person: Person): void;
   getAll(): Person[];
 }
